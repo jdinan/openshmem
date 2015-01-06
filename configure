@@ -61,6 +61,7 @@
 #   by Silicon Graphics International Corp. (SGI) The OpenSHMEM API
 #   (shmem) is released by Open Source Software Solutions, Inc., under an
 #   agreement with Silicon Graphics International Corp. (SGI).
+# Copyright (c) 2015 Intel Corporation. All rights reserved.
 #
 # All rights reserved.
 #
@@ -570,10 +571,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="gcc"
         fc_cmd="gfortran"
         cxx_cmd="g++"
@@ -586,10 +583,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="icc"
         fc_cmd="ifort"
         cxx_cmd="icpc"
@@ -602,10 +595,6 @@ case "$cc_type" in
         thread_flags=""
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="pgcc"
         fc_cmd="pgfortran"
         cxx_cmd="pgCC"
@@ -618,10 +607,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="suncc"
         fc_cmd="sunf90"
         cxx_cmd="sunCC"
@@ -634,10 +619,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="uhcc"
         fc_cmd="uhf90"
         cxx_cmd="uhCC"
@@ -650,10 +631,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="opencc"
         fc_cmd="openf90"
         cxx_cmd="openCC"
@@ -666,10 +643,6 @@ case "$cc_type" in
         thread_flags="-pthread"
         so_flags="-shared"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         cc_cmd="clang"
         fc_cmd="false"
         cxx_cmd="clang++"
@@ -681,10 +654,6 @@ case "$cc_type" in
         # pic_flags="-qpic"
         thread_flags="-qthreaded"
         exe_libs="-L$exe_libdir"
-        if  [ "$found_libexe" = "shared" ]
-        then
-            exe_libs="$exe_libs -Wl,-rpath,$exe_libdir"
-        fi
         so_flags="-G"
         cc_cmd="xlc"
         fc_cmd="xlf"
