@@ -112,6 +112,7 @@ gasnet_threnv=par
 exe_incdir=/usr/include
 exe_libdir=/usr/lib64
 
+feature_progthread=enabled
 feature_experimental=disabled
 feature_debug=disabled
 feature_trace=disabled
@@ -233,6 +234,9 @@ Usage: $progname [options]
                                      (default: /usr/lib64)
 
   Optional features:
+
+    --enable-progress-thread     Enable OpenSHMEM progress thread (default)
+    --disable-progress-thread    Disable OpenSHMEM progress thread
 
     --enable-trace               Run-time traces
     --disable-trace              No run-time traces
@@ -387,6 +391,12 @@ do
         --disable-debug)
             feature_debug=disabled
             ;;
+	--enable-progress-thread)
+	    feature_progthread=enabled
+	    ;;
+	--disable-progress-thread)
+	    feature_progthread=disabled
+	    ;;
         --enable-trace)
             feature_trace=enabled
             ;;
@@ -1063,6 +1073,7 @@ do
         -e "s%@HAVE_FEATURE_PSHMEM@%$feature_pshmem%g" \
         -e "s%@HAVE_FEATURE_DEBUG@%$feature_debug%g" \
         -e "s%@HAVE_FEATURE_TRACE@%$feature_trace%g" \
+        -e "s%@HAVE_FEATURE_PROGTHREAD@%$feature_progthread%g" \
         -e "s%@PREFIX@%$prefix%g" \
         -e "s%@BIN_DIR@%$bindir%g" \
         -e "s%@LIB_DIR@%$libdir%g" \
@@ -1126,6 +1137,7 @@ tell ""
 tell "Options:"
 tell "  Debug is                      $feature_debug"
 tell "  Trace is                      $feature_trace"
+tell "  Progress thread is            $feature_progthread"
 tell "  PSHMEM support is             $feature_pshmem"
 tell "  Experimental features are     $feature_experimental"
 tell ""
@@ -1290,6 +1302,7 @@ setfeature()
 
     setfeature debug        "run-time debug and other sanity checks"
     setfeature trace        "run-time tracing calls"
+    setfeature progthread   "progress thread"
     setfeature pshmem       "PSHMEM profiling interface"
     setfeature experimental "Experimental (non-API) routines"
 
